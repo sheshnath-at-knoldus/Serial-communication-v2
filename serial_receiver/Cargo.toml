@@ -10,3 +10,5 @@ serialport = "4.2.2"
 
 serial2 = "0.2.8"
 time = "0.3.30"
+log = "0.4.20"
+kafka = "0.9.0"
