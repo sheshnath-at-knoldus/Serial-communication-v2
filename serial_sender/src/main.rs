@@ -166,9 +166,10 @@ fn receive_acknowledgement(mut port: Box<dyn SerialPort>) {
 
                         println!("Acknowledgement -> {:?}", utf_8_data);
 
-                        if(utf_8_data =="/n") {
+                        if(utf_8_data.contains("/n")) {
                             break;
                             }
+
 
                        // thread::sleep(Duration::from_millis(50));
                     } else {
@@ -199,13 +200,13 @@ fn main() {
 
     list_available_ports();
 
-    let mut port = initialize_serial_port("/dev/ttyS0", 115_200);
+    let mut port = initialize_serial_port("/dev/ttyUSB0", 9600);
 
     for data in file_buffer.chunks(size_of_buffer / 8) {
         write_to_serial_port(&mut port, data);
         
         if data == &[10] {
-           // println!("Data: {:?}", data);
+            println!("Data: {:?}", data);
           //  thread::sleep(Duration::from_millis(50));
 
             receive_acknowledgement(port.try_clone().expect("Unable to clone port"));
